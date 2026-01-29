@@ -12,20 +12,32 @@ int main()
 	COORD origin = {0, 0};
 	DWORD written;
 
-	HANDLE out_handle = CreateConsoleScreenBuffer(GENERIC_WRITE | GENERIC_READ, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
-	SetConsoleActiveScreenBuffer(out_handle);
+	HANDLE Sbuffer1 = CreateConsoleScreenBuffer(GENERIC_WRITE | GENERIC_READ, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
+	HANDLE Sbuffer2 = CreateConsoleScreenBuffer(GENERIC_WRITE | GENERIC_READ, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
+	HANDLE front_buffer = Sbuffer1;
+	HANDLE back_buffer = NULL;
+
+	CONSOLE_CURSOR_INFO cci;
+	cci.bVisible = 0;
 
 	while (running)
 	{
+		// Check for input to exit the application.
 		if (esc_pressed())
 			break;
-		FillConsoleOutputCharacterA(out_handle, ' ', 5000, origin, &written);
-		WriteConsoleOutputCharacterA(out_handle, "@", 1, pos, &written);
-		Beep(6000, 1);
+
+		SetConsoleCursorInfo(front_buffer, &cci);
+		back_buffer = (front_buffer == Sbuffer1) ? Sbuffer2 : Sbuffer1;
+		
+		FillConsoleOutputCharacterA(back_buffer, ' ', 5000, origin, &written);
+		WriteConsoleOutputCharacterA(back_buffer, "@", 1, pos, &written);
 		pos.X++;
-		Sleep(400);
+
+		front_buffer = back_buffer;
+		SetConsoleActiveScreenBuffer(front_buffer);
+
+		Sleep(16);
 	}
-	
 
 	return 0;
 }
@@ -40,6 +52,8 @@ void set_cursor_pos(int x, int y)
 
 char esc_pressed()
 {
+	// ASCII code 27 represents the esc key.
+
 	if (_kbhit())
 	{
 		if (_getch() == 27)
