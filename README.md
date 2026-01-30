@@ -8,7 +8,7 @@
 
 - Real-time function plotting  
 - Flicker-free double-buffered console rendering  
-- Supports quadratic and linear functions  
+- Has a tiny CLI game-engine included
 
 ---
 
@@ -24,9 +24,13 @@
 ---
 
 ### Compiling
-Using **MAKE**:
+Using **MAKE** on windows:
 ```bash
-make
+make win
+```
+Using **MAKE** on unix:
+```bash
+make unix
 ```
 ## Running
 - After compiling, run the program from the terminal:
