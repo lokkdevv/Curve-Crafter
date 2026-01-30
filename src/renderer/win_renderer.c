@@ -2,6 +2,8 @@
 
 char running;
 
+float fps;
+
 COORD origin;
 DWORD written;
 
@@ -28,20 +30,22 @@ void init_buffers()
 	back_buffer = (front_buffer == Sbuffer1) ? Sbuffer2 : Sbuffer1;
 }
 
-void swap_buffers(float fps)
+void swap_buffers()
 {
 	front_buffer = back_buffer;
 	SetConsoleActiveScreenBuffer(front_buffer);
 	Sleep(fps / 3.75);
 }
 
-void clear_con()
+void clear_console()
 {
 	FillConsoleOutputCharacterA(back_buffer, ' ', 5000, origin, &written);
 }
 
-void init_win_cli()
+void init_renderer()
 {
+	fps = 60;
+
 	running = 1;
 
 	origin.X = 0;
@@ -56,10 +60,7 @@ void init_win_cli()
 	cci.dwSize = 1;
 }
 
-void set_cursor_pos(int x, int y)
+void set_fps(float input_fps)
 {
-	HANDLE out_handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	COORD pos = {x, y};
-
-	SetConsoleCursorPosition(out_handle, pos);
+	fps = input_fps;
 }

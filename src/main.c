@@ -15,21 +15,21 @@ int main()
 {
 	COORD pos = {0, 5};
 	
-	init_win_cli();
+	init_renderer();
+	// set_fps(30);
 	
 	while (running)
 	{
-		// Check for input to exit the application.
 		if (esc_pressed())
 			break;
 
 		init_buffers();
+		clear_console();
 
-		clear_con();
 		draw_char("*", pos);
 		pos.X++;
 
-		swap_buffers(60.0);
+		swap_buffers();
 	}
 
 	return 0;
