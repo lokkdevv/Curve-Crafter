@@ -1,6 +1,14 @@
-#include "cli_os_layer.h"
-#include "input.h"
+#ifdef _WIN32
 
+#include "input/win_input.h"
+#include "renderer/win_renderer.h"
+
+#else
+
+#include "input/unix_input.h"
+#include "renderer/unix_renderer.h"
+
+#endif
 
 int main()
 {
@@ -20,7 +28,7 @@ int main()
 		WriteConsoleOutputCharacterA(back_buffer, "@", 1, pos, &written);
 		pos.X++;
 
-		swap_buffers(16);
+		swap_buffers(60.0);
 	}
 
 	return 0;

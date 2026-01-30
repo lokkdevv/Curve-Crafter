@@ -1,4 +1,4 @@
-#include "win_cli.h"
+#include "win_renderer.h"
 
 char running;
 
@@ -18,11 +18,11 @@ void init_buffers()
 	back_buffer = (front_buffer == Sbuffer1) ? Sbuffer2 : Sbuffer1;
 }
 
-void swap_buffers(int fps)
+void swap_buffers(float fps)
 {
 	front_buffer = back_buffer;
 	SetConsoleActiveScreenBuffer(front_buffer);
-	Sleep(fps);
+	Sleep(fps / 3.75);
 }
 
 void clear_con()
