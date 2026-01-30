@@ -1,46 +1,16 @@
 #include "win_input.h"
 
-char esc_pressed()
+char exited()
 {
-	// ASCII code 27 represents the esc key.
-
-	if (_kbhit())
-	{
-		if (_getch() == KEY_ESC)
-		{
-			return 1;
-		}
-		return 0;
-	}
-	return 0;
+	return (GetAsyncKeyState(KEY_ESC) & KEY_JUST_PRESSED) != 0;
 }
 
-char key_pressed(char KEY)
+char is_key_pressed(char KEY)
 {
-	if (!_kbhit())
-	{
-		return 0;
-	}
-	if (_getch() == KEY)
-	{
-		return 1;
-	}
-	return 0;
+	return (GetAsyncKeyState(KEY) & KEY_PRESSED) != 0;
 }
 
-char arrow_key_pressed(char KEY)
+char is_key_just_pressed(char KEY)
 {
-	if (!_kbhit())
-	{
-		return 0;
-	}
-
-	if ( _getch() == KEY_ARROW)
-	{
-		if (_getch() == KEY)
-		{
-			return 1;
-		}
-	}
-	return 0;
+	return (GetAsyncKeyState(KEY) & KEY_JUST_PRESSED) != 0;
 }
