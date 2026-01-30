@@ -18,4 +18,5 @@ void swap_buffers(float fps /*fps is reversed, so a bigger number means less fra
 void clear_con();
 void init_win_cli();
 void set_cursor_pos(int x, int y);
-
+void draw_char(char character[], COORD pos);
+void draw_chars(char character[], int size, COORD pos);

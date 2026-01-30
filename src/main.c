@@ -1,5 +1,6 @@
 #ifdef _WIN32
 
+// #include <stdio.h>
 #include "input/win_input.h"
 #include "renderer/win_renderer.h"
 
@@ -13,9 +14,9 @@
 int main()
 {
 	COORD pos = {0, 5};
-
+	
 	init_win_cli();
-
+	
 	while (running)
 	{
 		// Check for input to exit the application.
@@ -25,7 +26,7 @@ int main()
 		init_buffers();
 
 		clear_con();
-		WriteConsoleOutputCharacterA(back_buffer, "@", 1, pos, &written);
+		draw_char("*", pos);
 		pos.X++;
 
 		swap_buffers(60.0);

@@ -12,6 +12,16 @@ HANDLE back_buffer;
 
 CONSOLE_CURSOR_INFO cci;
 
+void draw_char(char character[], COORD pos)
+{
+	WriteConsoleOutputCharacterA(back_buffer, character, 1, pos, &written);
+}
+
+void draw_chars(char character[], int size, COORD pos)
+{
+	WriteConsoleOutputCharacterA(back_buffer, character, size, pos, &written);
+}
+
 void init_buffers()
 {
 	SetConsoleCursorInfo(front_buffer, &cci);

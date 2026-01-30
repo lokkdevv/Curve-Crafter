@@ -6,11 +6,41 @@ char esc_pressed()
 
 	if (_kbhit())
 	{
-		if (_getch() == 27)
+		if (_getch() == KEY_ESC)
 		{
 			return 1;
 		}
 		return 0;
+	}
+	return 0;
+}
+
+char key_pressed(char KEY)
+{
+	if (!_kbhit())
+	{
+		return 0;
+	}
+	if (_getch() == KEY)
+	{
+		return 1;
+	}
+	return 0;
+}
+
+char arrow_key_pressed(char KEY)
+{
+	if (!_kbhit())
+	{
+		return 0;
+	}
+
+	if ( _getch() == KEY_ARROW)
+	{
+		if (_getch() == KEY)
+		{
+			return 1;
+		}
 	}
 	return 0;
 }
