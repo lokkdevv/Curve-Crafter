@@ -1,6 +1,6 @@
 # CurveCrafter
 
-**CurveCrafter** is a terminal-based tool that visualizes mathematical functions in real-time. It plots functions like quadratics, sine waves, linear, and more directly in the console. Making it both an educational and visually satisfying experience.
+**CurveCrafter** is a terminal-based tool that visualizes mathematical functions. It’s split into 2 parts, a very basic cli game-engine and a very basic math parser, so the project can be taken appart to take and use any tool you want.
 
 ---
 
@@ -24,18 +24,6 @@
 ---
 
 ### Compiling
-
-Using **GCC**:
-
-```bash
-cd ./src
-gcc -o CurveCrafter main.c
-```
-Using **MSVC** (Visual Studio Developer Command Prompt):
-```bash
-cd ./src
-cl /Fe:CurveCrafter.exe main.c
-```
 Using **MAKE**:
 ```bash
 make
