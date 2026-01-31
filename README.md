@@ -15,6 +15,7 @@
 ## Getting Started
 
 ### Requirements
+- Windows SDK (Only till unix support is added)
 
 - Windows OS (currently only supports Windows console)  
 - C compiler (e.g., `gcc`, `cl`, or any IDE that supports C compilation)  
