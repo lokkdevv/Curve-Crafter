@@ -2,9 +2,11 @@
 
 char running;
 
+int console_area;
 float fps;
 
 COORD origin;
+COORD console_size;
 DWORD written;
 
 HANDLE Sbuffer1;
@@ -12,6 +14,7 @@ HANDLE Sbuffer2;
 HANDLE front_buffer;
 HANDLE back_buffer;
 
+CONSOLE_SCREEN_BUFFER_INFO csbi;
 CONSOLE_CURSOR_INFO cci;
 
 void draw_char(char character[], COORD pos)
@@ -26,6 +29,11 @@ void draw_chars(char character[], int size, COORD pos)
 
 void swap_buffers()
 {
+	GetConsoleScreenBufferInfo(back_buffer, &csbi);
+	console_area = (csbi.srWindow.Right + 1) * (csbi.srWindow.Bottom + 1);
+	COORD temp = {csbi.srWindow.Right + 1, csbi.srWindow.Bottom + 1};
+	console_size = temp;
+	
 	front_buffer = back_buffer;
 	SetConsoleActiveScreenBuffer(front_buffer);
 	SetConsoleCursorInfo(front_buffer, &cci);
@@ -33,9 +41,9 @@ void swap_buffers()
 	Sleep(fps / 3.75);
 }
 
-void clear_console()
+void clear_console(int size)
 {
-	FillConsoleOutputCharacterA(back_buffer, ' ', 5000, origin, &written);
+	FillConsoleOutputCharacterA(back_buffer, ' ', size, origin, &written);
 }
 
 void init_renderer()
@@ -54,6 +62,11 @@ void init_renderer()
 
 	cci.bVisible = 0;
 	cci.dwSize = 1;
+
+	GetConsoleScreenBufferInfo(back_buffer, &csbi);
+	console_area = (csbi.srWindow.Right + 1) * (csbi.srWindow.Bottom + 1);
+	COORD temp = {csbi.srWindow.Right + 1, csbi.srWindow.Bottom + 1};
+	console_size = temp;
 }
 
 void set_fps(float input_fps)
