@@ -14,8 +14,6 @@
 
 int main(int argc, char** argv)
 {
-	int first_time = 1;
-	
 	/*int num = 0;
 	char** parsed = parse(argv[1], &num);
 	for (int i = 0; i < num; i++)
@@ -23,8 +21,6 @@ int main(int argc, char** argv)
 		printf("token[%d]: %s\n", i, parsed[i]);
 	}
 	double result = evaluate(parsed, num);*/
-
-
 
 	COORD player_pos = {5, 5};
 	COORD player_pos2;

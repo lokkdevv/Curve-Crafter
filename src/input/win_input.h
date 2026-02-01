@@ -6,6 +6,7 @@
 #define KEY_JUST_PRESSED 0x0001
 
 #define KEY_ESC VK_ESCAPE
+#define KEY_SPACE VK_SPACE
 
 #define KEY_UP VK_UP
 #define KEY_DOWN VK_DOWN

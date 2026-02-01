@@ -14,7 +14,7 @@ math = ./src/core/math/math.c
 
 out = ./bin/main
 
-.PHONY: run win unix pong clean
+.PHONY: run win unix win_pong unix_pong clean
 
 win: ${main} ${math} ${win_input} ${win_renderer}
 	${CC}  ${CFLAGS}  ${main} ${math} ${win_input} ${win_renderer}  -o ${out}
@@ -24,8 +24,11 @@ unix: ${main} ${math} ${unix_input} ${unix_renderer}
 	echo "Error: Unix not supported yet."
 	echo "Note: It would be much appreciated if You contribute by adding support to unix systems."
 
-pong: ${pong} ${win_input} ${win_renderer}
+win_pong: ${pong} ${win_input} ${win_renderer}
 	${CC}  ${CFLAGS}  ${pong} ${win_input} ${win_renderer}  -o ${out}
+
+unix_pong: ${pong} ${unix_input} ${unix_renderer}
+	${CC}  ${CFLAGS}  ${pong} ${unix_input} ${unix_renderer}  -o ${out}
 
 run:
 	${out}

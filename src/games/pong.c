@@ -12,8 +12,10 @@
 
 int main()
 {
-	COORD player1_pos = {5, 5};
-	COORD player2_pos = {160, 5};
+	char game_started = 0;
+
+	COORD player1_pos = {5, 10};
+	COORD player2_pos = {160, 10};
 
 	COORD ball_pos = {80, 6};
 
@@ -27,45 +29,56 @@ int main()
 		// Exit if ESC pressed
 		if (exited()) break;
 		
-		// PLAYER1 input /////////////////////
-		if (is_key_pressed(KEY_W))
-		{
-			player1_pos.Y -= 1;
-		}
-		if (is_key_pressed(KEY_S))
-		{
-			player1_pos.Y += 1;
-		}
-		//////////////////////////////////////
+		if (is_key_just_pressed(KEY_SPACE)) game_started = 1;
 
-		// PLAYER2 input /////////////////////
-		if (is_key_pressed(KEY_UP))
+		if (!game_started)
 		{
-			player2_pos.Y -= 1;
+			ball_pos.X = console_size.X / 2 - 1;
+			ball_pos.Y = console_size.Y / 2 - 1;
+			COORD text_pos = {ball_pos.X - ball_pos.X / 4, ball_pos.Y};
+			clear_console(console_area);
+			draw_chars("Press 'SPACE' to start the game.", 32, text_pos);
 		}
-		if (is_key_pressed(KEY_DOWN))
-		{
-			player2_pos.Y += 1;
-		}
-		//////////////////////////////////////
-
-		COORD player1_pos2 = {player1_pos.X, player1_pos.Y + 1};
-		COORD player1_pos3 = {player1_pos.X, player1_pos.Y + 2};
-
-		COORD player2_pos2 = {player2_pos.X, player2_pos.Y + 1};
-		COORD player2_pos3 = {player2_pos.X, player2_pos.Y + 2};
 		
-		clear_console(console_area);
-		
-		draw_char("@", ball_pos);
-		
-		draw_char("#", player1_pos);
-		draw_char("#", player1_pos2);
-		draw_char("#", player1_pos3);
+		else if (game_started)
+		{
+			// PLAYER1 input /////////////////////
+			if (is_key_pressed(KEY_Z)) player1_pos.Y -= 1;
+			if (is_key_pressed(KEY_S)) player1_pos.Y += 1;
+			//////////////////////////////////////
+	
+			// PLAYER2 input /////////////////////
+			if (is_key_pressed(KEY_UP)) player2_pos.Y -= 1;
+			if (is_key_pressed(KEY_DOWN)) player2_pos.Y += 1;
+			//////////////////////////////////////
+	
+			// Bounds Checking ///////////////////
+			if (player1_pos.Y < 1) player1_pos.Y = 1;
+			if (player1_pos.Y > console_size.Y - 2) player1_pos.Y = console_size.Y - 2;
+			if (player2_pos.Y < 1) player2_pos.Y = 1;
+			if (player2_pos.Y > console_size.Y - 2) player2_pos.Y = console_size.Y - 2;
+			//////////////////////////////////////
+	
+			// Update the players ////////////////
+			// top and bottom position ///////////
+			COORD player1_pos_top = {player1_pos.X, player1_pos.Y - 1};
+			COORD player1_pos_bottom = {player1_pos.X, player1_pos.Y + 1 };
+			COORD player2_pos_top = {player2_pos.X, player2_pos.Y - 1};
+			COORD player2_pos_bottom = {player2_pos.X, player2_pos.Y + 1};
+			//////////////////////////////////////
 
-		draw_char("#", player2_pos);
-		draw_char("#", player2_pos2);
-		draw_char("#", player2_pos3);
+			clear_console(console_area);
+			
+			draw_char("@", ball_pos);
+			
+			draw_char("#", player1_pos_top);
+			draw_char("#", player1_pos);
+			draw_char("#", player1_pos_bottom);
+	
+			draw_char("#", player2_pos_top);
+			draw_char("#", player2_pos);
+			draw_char("#", player2_pos_bottom);
+		}
 		
 		swap_buffers();
 	}
