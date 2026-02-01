@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "input/win_input.h"
 #include "renderer/win_renderer.h"
+#include "core/math/math.h"
 
 #else
 
@@ -11,42 +12,49 @@
 
 #endif
 
-int main()
+int main(int argc, char** argv)
 {
+
+	int num = 0;
+	char** parsed = parse(argv[1], &num);
+	double result = evaluate(parsed, num);
+
+
+	/*
 	COORD player_pos = {5, 5};
 	
 	init_renderer();
-	// set_fps(30);
 	
 	while (running)
 	{
 		if (exited())
 			break;
-
-		init_buffers();
-		clear_console();
-
-		if (is_key_pressed(KEY_D))
+			
+		if (is_key_pressed(KEY_RIGHT))
 		{
 			player_pos.X += 1;
 		}
-		if (is_key_pressed(KEY_Q))
+		if (is_key_pressed(KEY_LEFT))
 		{
 			player_pos.X -= 1;
 		}
-		if (is_key_pressed(KEY_Z))
+		if (is_key_pressed(KEY_UP))
 		{
 			player_pos.Y -= 1;
 		}
-		if (is_key_pressed(KEY_S))
+		if (is_key_pressed(KEY_DOWN))
 		{
 			player_pos.Y += 1;
 		}
-		draw_char("@", player_pos);
 		
+		
+		clear_console();
+
+		draw_char("#", player_pos);
+
 		
 		swap_buffers();
 	}
-
+	*/
 	return 0;
 }

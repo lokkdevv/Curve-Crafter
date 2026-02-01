@@ -24,16 +24,12 @@ void draw_chars(char character[], int size, COORD pos)
 	WriteConsoleOutputCharacterA(back_buffer, character, size, pos, &written);
 }
 
-void init_buffers()
-{
-	SetConsoleCursorInfo(front_buffer, &cci);
-	back_buffer = (front_buffer == Sbuffer1) ? Sbuffer2 : Sbuffer1;
-}
-
 void swap_buffers()
 {
 	front_buffer = back_buffer;
 	SetConsoleActiveScreenBuffer(front_buffer);
+	SetConsoleCursorInfo(front_buffer, &cci);
+	back_buffer = (front_buffer == Sbuffer1) ? Sbuffer2 : Sbuffer1;
 	Sleep(fps / 3.75);
 }
 

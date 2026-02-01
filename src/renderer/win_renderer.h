@@ -16,7 +16,6 @@ extern HANDLE back_buffer;
 
 extern CONSOLE_CURSOR_INFO cci;
 
-void init_buffers();
 void swap_buffers();
 void clear_console();
 void init_renderer();
