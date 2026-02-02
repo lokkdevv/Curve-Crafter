@@ -13,51 +13,61 @@
 
 #endif
 
-#define MAX_X 300
-#define MIN_X -5
+#define MAX_X 500
+#define MIN_X -500
 
 int main(int argc, char** argv)
 {
 	if (argc < 2)
 	{
-		printf("ERROR: Incorrect use of application!\n");
+		printf("ERROR: You must enter atleast one expression\n");
+		printf("EXAMPLE: %s \033[34m\"9*x\"\n", argv[0]);
 		return 1;
 	}
+
+	int camera_x_offset = 0;
+	int camera_y_offset = 0;
 
 	int x = MIN_X;
 	int num = 0;
 	char** parsed;
+	double result = 0;
 
-	// printf("%.2f\n", result);
 	init_renderer();
+	set_draw_interval(0);
 
 	while (running)
 	{
 		if (exited()) running = 0;
+
+		if (is_key_pressed(KEY_LEFT)) camera_x_offset += 2;
+		if (is_key_pressed(KEY_RIGHT)) camera_x_offset -= 2;
+		if (is_key_pressed(KEY_UP)) camera_y_offset += 1;
+		if (is_key_pressed(KEY_DOWN)) camera_y_offset -= 1;
 		
-
-		if (x > MAX_X)
+		clear_console(console_area);
+	
+		while (x < MAX_X)
 		{
-			x = MAX_X;
-		}
+			num = 0;
+			parsed = parse(argv[1], &num);
 
-		num = 0;
-		parsed = parse(argv[1], &num);
-
-		char x_storage[32] = "";
-		for (int i = 0; i < num; i++)
-		{
-			if (strcmp(parsed[i], "x") == 0)
+			char x_buffer[32];
+			for (int i = 0; i < num; i++)
 			{
-				parsed[i] = itoa(x, x_storage, 10);
-				break;
+				if (strcmp(parsed[i], "x") == 0)
+				{
+					parsed[i] = itoa(x, x_buffer, 10);
+					break;
+				}
 			}
+			x++;
+			result = evaluate(parsed, num);
+			COORD pos = {x + camera_x_offset, (-1*(short)(floor(result)) / 5) + camera_y_offset};
+			draw_char("@", pos);
 		}
-		x++;
-		double result = evaluate(parsed, num);
+		x = MIN_X;
 
-		COORD pos = {x + 10, (short)(floor(result)) / 5};
-		draw_char("@", pos);
 		swap_buffers();
 	}
 	

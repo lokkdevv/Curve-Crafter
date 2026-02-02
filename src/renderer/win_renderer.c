@@ -3,7 +3,7 @@
 char running;
 
 int console_area;
-float fps;
+float draw_interval;
 
 COORD origin;
 COORD console_size;
@@ -38,7 +38,14 @@ void swap_buffers()
 	SetConsoleActiveScreenBuffer(front_buffer);
 	SetConsoleCursorInfo(front_buffer, &cci);
 	back_buffer = (front_buffer == Sbuffer1) ? Sbuffer2 : Sbuffer1;
-	Sleep(fps / 3.75);
+	Sleep(draw_interval / 3.75);
+}
+
+void init_single_buffer()
+{
+	back_buffer = front_buffer;
+	SetConsoleActiveScreenBuffer(back_buffer);
+	SetConsoleCursorInfo(front_buffer, &cci);
 }
 
 void clear_console(int con_area)
@@ -48,7 +55,7 @@ void clear_console(int con_area)
 
 void init_renderer()
 {
-	fps = 60;
+	draw_interval = 60;
 
 	running = 1;
 
@@ -69,7 +76,7 @@ void init_renderer()
 	console_size = temp;
 }
 
-void set_fps(float input_fps)
+void set_draw_interval(float interval)
 {
-	fps = input_fps;
+	draw_interval = interval;
 }
