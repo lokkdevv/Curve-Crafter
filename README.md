@@ -40,7 +40,7 @@ make unix
 ```
 - To give it input add a string after the program name when running it, example:
 ```bash
-./bin/CurveCrafter "2x^2+4x+7"
+./bin/CurveCrafter "2*x*x+4*x+7"
 ```
 
 ## Future Plans
