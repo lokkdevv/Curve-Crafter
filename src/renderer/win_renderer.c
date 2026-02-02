@@ -41,9 +41,9 @@ void swap_buffers()
 	Sleep(fps / 3.75);
 }
 
-void clear_console(int size)
+void clear_console(int con_area)
 {
-	FillConsoleOutputCharacterA(back_buffer, ' ', size, origin, &written);
+	FillConsoleOutputCharacterA(back_buffer, ' ', con_area, origin, &written);
 }
 
 void init_renderer()

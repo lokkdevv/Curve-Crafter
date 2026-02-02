@@ -51,10 +51,30 @@ char** parse(const char* expression, int* out_count)
 }
 double evaluate(char** tokens, int count)
 {
-	for (int i = 0; i < count; i++)
+	int num = atoi(tokens[0]);
+	char opr;
+	double result = num;
+	for (int i = 1; i < count; i += 2)
 	{
-		tokens[i]++;
+		opr = tokens[i][0];
+		switch (opr)
+		{
+		case '+':
+			result += atoi(tokens[i+1]);
+			break;
+		case '-':
+			result -= atoi(tokens[i+1]);
+			break;
+		case '*':
+			result *= atoi(tokens[i+1]);
+			break;
+		case '/':
+			result /= atoi(tokens[i+1]);
+			break;
+		default:
+			break;
+		}
 	}
 	
-	return 0;
+	return result;
 }

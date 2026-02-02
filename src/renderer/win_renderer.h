@@ -20,7 +20,7 @@ extern CONSOLE_SCREEN_BUFFER_INFO csbi;
 extern CONSOLE_CURSOR_INFO cci;
 
 void swap_buffers();
-void clear_console(int size);
+void clear_console(int con_area);
 void init_renderer();
 void draw_char(char character[], COORD pos);
 void draw_chars(char character[], int size, COORD pos);
