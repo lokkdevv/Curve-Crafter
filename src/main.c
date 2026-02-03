@@ -8,8 +8,8 @@
 
 #else
 
-#include "input/unix_input.h"
-#include "renderer/unix_renderer.h"
+#include "input/linux_input.h"
+#include "renderer/linux_renderer.h"
 
 #endif
 
