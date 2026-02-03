@@ -19,7 +19,7 @@
 int main()
 {
 	// Set random starting Direction for the Ball //
-	COORD ball_dir = {0, 0};
+	Vec2 ball_dir = {0, 0};
 	srand(time(NULL));
 	ball_dir.X = rand() % 2;
 	if (ball_dir.X == 0) ball_dir.X = -BALL_SPEED;
@@ -28,10 +28,10 @@ int main()
 
 	char game_started = 0;
 
-	COORD player1_pos = {5, 10};
-	COORD player2_pos = {160, 10};
+	Vec2 player1_pos = {5, 10};
+	Vec2 player2_pos = {160, 10};
 
-	COORD ball_pos = {80, 6};
+	Vec2 ball_pos = {80, 6};
 
 	init_renderer();
 	
@@ -54,8 +54,8 @@ int main()
 			player2_pos.Y = console_size.Y / 2 - 1;
 			player2_pos.X = console_size.X - 5;
 
-			COORD text_pos = {ball_pos.X - ball_pos.X / 4, ball_pos.Y};
-			COORD text_pos_2 = {ball_pos.X - (ball_pos.X / 2 - ball_pos.X / 10), ball_pos.Y + 2};
+			Vec2 text_pos = {ball_pos.X - ball_pos.X / 4, ball_pos.Y};
+			Vec2 text_pos_2 = {ball_pos.X - (ball_pos.X / 2 - ball_pos.X / 10), ball_pos.Y + 2};
 			clear_console(console_area);
 			draw_chars("Press 'SPACE' to start the game.", 32, text_pos);
 			draw_chars("Do not resize the terminal windows after pressing 'SPACE'.", 58, text_pos_2);
@@ -82,10 +82,10 @@ int main()
 	
 			// Update the players ////////////////
 			// top and bottom position ///////////
-			COORD player1_pos_top = {player1_pos.X, player1_pos.Y - 1};
-			COORD player1_pos_bottom = {player1_pos.X, player1_pos.Y + 1 };
-			COORD player2_pos_top = {player2_pos.X, player2_pos.Y - 1};
-			COORD player2_pos_bottom = {player2_pos.X, player2_pos.Y + 1};
+			Vec2 player1_pos_top = {player1_pos.X, player1_pos.Y - 1};
+			Vec2 player1_pos_bottom = {player1_pos.X, player1_pos.Y + 1 };
+			Vec2 player2_pos_top = {player2_pos.X, player2_pos.Y - 1};
+			Vec2 player2_pos_bottom = {player2_pos.X, player2_pos.Y + 1};
 			//////////////////////////////////////
 
 			// P1 Collision Detection ////////////

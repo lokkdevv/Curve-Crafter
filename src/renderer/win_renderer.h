@@ -1,14 +1,14 @@
 #pragma once
 #include <windows.h>
-
+#include "../core/engine/engine.h"
 
 extern char running;
 
 extern int console_area;
 extern float draw_interval;
 
-extern COORD origin;
-extern COORD console_size;
+extern Vec2 origin;
+extern Vec2 console_size;
 extern DWORD written;
 
 extern HANDLE Sbuffer1;
@@ -23,6 +23,6 @@ void swap_buffers();
 void init_single_buffer();
 void clear_console(int con_area);
 void init_renderer();
-void draw_char(char character[], COORD pos);
-void draw_chars(char character[], int size, COORD pos);
+void draw_char(char character[], Vec2 pos);
+void draw_chars(char character[], int size, Vec2 pos);
 void set_draw_interval(float draw_interval);

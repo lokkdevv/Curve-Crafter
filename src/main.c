@@ -21,7 +21,7 @@ int main(int argc, char** argv)
 	if (argc < 2)
 	{
 		printf("ERROR: You must enter atleast one expression\n");
-		printf("EXAMPLE: %s \033[34m\"9*x\"\n", argv[0]);
+		printf("EXAMPLE: %s \"9*x\"\n", argv[0]);
 		return 1;
 	}
 
@@ -51,13 +51,13 @@ int main(int argc, char** argv)
 		// X AXIS
 		for (int i = 0; i < console_size.X; i++)
 		{
-			COORD x_axis_pos = {i, (console_size.Y / 2) + camera_y_offset};
+			Vec2 x_axis_pos = {i, (console_size.Y / 2) + camera_y_offset};
 			draw_char("#", x_axis_pos);
 		}
 		// Y AXIS
 		for (int i = 0; i < console_size.Y; i++)
 		{
-			COORD y_axis_pos = {(console_size.X / 2) + camera_x_offset, i};
+			Vec2 y_axis_pos = {(console_size.X / 2) + camera_x_offset, i};
 			draw_char("#", y_axis_pos);
 		}
 		/////////////////////////////////////////
@@ -78,7 +78,7 @@ int main(int argc, char** argv)
 			}
 			x++;
 			result = evaluate(parsed, num);
-			COORD pos = {x + camera_x_offset + console_size.X/2, (-1*(short)(floor(result))) + camera_y_offset + console_size.Y/2};
+			Vec2 pos = {x + camera_x_offset + console_size.X/2, (-1*(short)(floor(result))) + camera_y_offset + console_size.Y/2};
 			draw_char("*", pos);
 		}
 		x = MIN_X;

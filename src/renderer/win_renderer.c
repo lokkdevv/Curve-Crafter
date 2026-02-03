@@ -5,8 +5,8 @@ char running;
 int console_area;
 float draw_interval;
 
-COORD origin;
-COORD console_size;
+Vec2 origin;
+Vec2 console_size;
 DWORD written;
 
 HANDLE Sbuffer1;
@@ -17,21 +17,23 @@ HANDLE back_buffer;
 CONSOLE_SCREEN_BUFFER_INFO csbi;
 CONSOLE_CURSOR_INFO cci;
 
-void draw_char(char character[], COORD pos)
+void draw_char(char character[], Vec2 pos)
 {
-	WriteConsoleOutputCharacterA(back_buffer, character, 1, pos, &written);
+	COORD temp = {pos.X, pos.Y};
+	WriteConsoleOutputCharacterA(back_buffer, character, 1, temp, &written);
 }
 
-void draw_chars(char character[], int size, COORD pos)
+void draw_chars(char character[], int size, Vec2 pos)
 {
-	WriteConsoleOutputCharacterA(back_buffer, character, size, pos, &written);
+	COORD temp = {pos.X, pos.Y};
+	WriteConsoleOutputCharacterA(back_buffer, character, size, temp, &written);
 }
 
 void swap_buffers()
 {
 	GetConsoleScreenBufferInfo(back_buffer, &csbi);
 	console_area = (csbi.srWindow.Right + 1) * (csbi.srWindow.Bottom + 1);
-	COORD temp = {csbi.srWindow.Right + 1, csbi.srWindow.Bottom + 1};
+	Vec2 temp = {csbi.srWindow.Right + 1, csbi.srWindow.Bottom + 1};
 	console_size = temp;
 	
 	front_buffer = back_buffer;
@@ -50,7 +52,8 @@ void init_single_buffer()
 
 void clear_console(int con_area)
 {
-	FillConsoleOutputCharacterA(back_buffer, ' ', con_area, origin, &written);
+	COORD temp = {origin.X, origin.Y};
+	FillConsoleOutputCharacterA(back_buffer, ' ', con_area, temp, &written);
 }
 
 void init_renderer()
@@ -72,7 +75,7 @@ void init_renderer()
 
 	GetConsoleScreenBufferInfo(back_buffer, &csbi);
 	console_area = (csbi.srWindow.Right + 1) * (csbi.srWindow.Bottom + 1);
-	COORD temp = {csbi.srWindow.Right + 1, csbi.srWindow.Bottom + 1};
+	Vec2 temp = {csbi.srWindow.Right + 1, csbi.srWindow.Bottom + 1};
 	console_size = temp;
 }
 
