@@ -1,53 +1,74 @@
-# CurveCrafter
+# Curve Crafter
+```
+    _________                             _________                _____  __                
+    \_   ___ \ __ ____________  __ ____   \_   ___ \____________ _/ ____\/  |_  ___________ 
+    /    \  \/|  |  \_  __ \  \/ // __ \  /    \  \/\_  __ \__  \\   __\\   __\/ __ \_  __ \
+    \     \___|  |  /|  | \/\   /\  ___/  \     \____|  | \// __ \|  |   |  | \  ___/|  | \/
+     \______  /____/ |__|    \_/  \___  >  \______  /|__|  (____  /__|   |__|  \___  >__|   
+            \/                        \/          \/            \/                 \/       
+```
 
-**CurveCrafter** is a terminal-based tool that visualizes mathematical functions. It’s split into 2 parts, a very basic cli game-engine and a very basic math parser, so the project can be taken appart to take and use any tool you want.
+**CurveCrafter** is a terminal-based C project combining:
+
+- A mini CLI game engine
+- A math function parser & real-time plotting tool
+
+Each part can be used independently, making it easy to repurpose for other projects or experiments.
 
 ---
 
 ## Features
 
-- Real-time function plotting  
-- Flicker-free double-buffered console rendering  
-- Has a tiny CLI game-engine included
+- Real-time function plotting of mathematical expressions
+- Flicker-free, double-buffered console rendering
+- Mini CLI game engine for simple terminal games
+- Graphing calculator capabilities via command-line input
 
 ---
 
-## Getting Started
+## Requirements
+- Windows OS (Unix/macOS support coming soon)
+- Windows SDK
+- C compiler (`gcc`, `cl`, or any IDE that supports C compilation)
 
-### Requirements
-- Windows SDK (Only till unix support is added)
-
-- Windows OS (currently only supports Windows console)  
-- C compiler (e.g., `gcc`, `cl`, or any IDE that supports C compilation)  
-
-> Note: Unix / Linux / macOS support may be added in future versions.
-
----
-
-### Compiling
-Using **MAKE** on windows:
+## Compiling
+**Graphing Calculator**
+- Windows:
 ```bash
-make win
+make win 
 ```
-Using **MAKE** on unix:
+
+- linux: (not supported yet):
 ```bash
-make unix
+make linux
+```
+**CLI pong game**
+- Windows:
+```bash
+make win_pong
+```
+
+- linux: (not supported yet):
+```bash
+make linux_pong
 ```
 ## Running
-- After compiling, run the program from the terminal:
-```bash
-./bin/CurveCrafter
-```
-- To give it input add a string after the program name when running it, example:
+After compiling, run from the terminal and pass a mathematical expression as an argument:
 ```bash
 ./bin/CurveCrafter "2*x*x+4*x+7"
 ```
+To run the pong game you can either open it as any regular exe or open it via terminal:
+```bash
+./bin/Pong
+```
 
 ## Future Plans
-- Add support for Unix/Linux/macOS terminals
+- Cross-platform terminal support (Unix/Linux/macOS)
+- Multiple functions plotted simultaneously
+- Expand the CLI game engine with reusable modules
 
-- Allow multiple functions to be plotted simultaneously
+_Contributions are welcome!_ Open an issue or submit a pull request if you want to help.
 
 
 ## License
-MIT License
+- MIT License
