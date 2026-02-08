@@ -1,0 +1,51 @@
+## renderer:
+
+--> on windows:
+
+- swap_buffers():
+
+
+- clear_console():
+
+
+- init_renderer():
+
+
+- draw_char(char character[], Vec2 pos):
+
+
+- draw_chars(char character[], int size, Vec2 pos):
+
+
+- set_draw_interval(float draw_interval):
+
+
+- terminate_renderer():
+
+
+
+--> on linux:
+
+- set_cursor_pos(Vec2 pos):
+
+
+- swap_buffers():
+
+
+- clear_console():
+
+
+- init_renderer():
+
+
+- draw_char(char character[], Vec2 pos):
+
+
+- draw_chars(char character[], int size, Vec2 pos):
+
+
+- set_draw_interval(float draw_interval):
+
+
+- terminate_renderer():
+

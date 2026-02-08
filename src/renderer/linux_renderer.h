@@ -24,8 +24,7 @@ extern struct winsize ws;
 ////
 
 void swap_buffers();
-void init_single_buffer();
-void clear_console(int con_area);
+void clear_console();
 void init_renderer();
 void draw_char(char character[], Vec2 pos);
 void draw_chars(char character[], int size, Vec2 pos);

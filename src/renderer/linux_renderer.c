@@ -46,29 +46,8 @@ void swap_buffers()
 	nanosleep(&ts, NULL);
 }
 
-void init_single_buffer()
+void clear_console()
 {
-	printf("\033[?1049h");
-	printf("\033[?25l");
-
-	draw_interval = 60;
-
-	running = 1;
-
-	origin.X = 0;
-	origin.Y = 0;
-
-	ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws);
-
-	console_area = ws.ws_col * ws.ws_row;
-	Vec2 temp = {ws.ws_col + 1, ws.ws_row + 1};
-	console_size = temp;
-}
-
-void clear_console(int con_area)
-{
-	con_area++;
-
 	printf("\033[2J\033[H");
 }
 

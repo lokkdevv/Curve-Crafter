@@ -1,0 +1,15 @@
+## Input:
+There are 3 functions in the input API: exited(), is_key_pressed() and is_key_just_pressed().
+- exited():
+Checks if the ESC key has been pressed.
+Returns 1 if pressed, otherwise returns 0.
+
+- is_key_pressed(KEY):
+Takes a key macro (defined in "win_input.h" for Windows) as input.
+Checks if the key is currently being held.
+Returns 1 if held, otherwise returns 0.
+
+- is_key_just_pressed(KEY):
+Takes a key macro (defined in "win_input.h" for Windows) as input.
+Checks if the key was just pressed in this frame.
+Returns 1 if just pressed, otherwise returns 0.

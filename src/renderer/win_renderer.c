@@ -43,17 +43,10 @@ void swap_buffers()
 	Sleep(draw_interval / 3.75);
 }
 
-void init_single_buffer()
-{
-	back_buffer = front_buffer;
-	SetConsoleActiveScreenBuffer(back_buffer);
-	SetConsoleCursorInfo(front_buffer, &cci);
-}
-
-void clear_console(int con_area)
+void clear_console()
 {
 	COORD temp = {origin.X, origin.Y};
-	FillConsoleOutputCharacterA(back_buffer, ' ', con_area, temp, &written);
+	FillConsoleOutputCharacterA(back_buffer, ' ', console_area, temp, &written);
 }
 
 void init_renderer()
