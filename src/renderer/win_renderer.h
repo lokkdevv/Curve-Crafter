@@ -26,3 +26,5 @@ void init_renderer();
 void draw_char(char character[], Vec2 pos);
 void draw_chars(char character[], int size, Vec2 pos);
 void set_draw_interval(float draw_interval);
+
+void terminate_renderer();

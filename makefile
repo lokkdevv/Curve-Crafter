@@ -20,9 +20,7 @@ win: ${main} ${math} ${win_input} ${win_renderer}
 	${CC}  ${CFLAGS}  ${main} ${math} ${win_input} ${win_renderer}  -o ${out}
 
 linux: ${main} ${math} ${unix_input} ${unix_renderer}
-	# ${CC}  ${CFLAGS}  ${main} ${math} ${unix_input} ${unix_renderer}  -o ${out}
-	echo "Error: Linux not supported yet."
-	echo "Note: It would be much appreciated if You contribute by adding support to linux."
+	${CC}  ${CFLAGS}  ${main} ${math} ${unix_input} ${unix_renderer}  -o ${out}
 
 win_pong: ${pong} ${win_input} ${win_renderer}
 	${CC}  ${CFLAGS}  ${pong} ${win_input} ${win_renderer}  -o ${out}

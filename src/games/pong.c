@@ -10,7 +10,6 @@
 #include "../input/linux_input.h"
 #include "../renderer/linux_renderer.h"
 #include <stdlib.h>
-#include <time.h>
 
 #endif
 
@@ -54,8 +53,8 @@ int main()
 			player2_pos.Y = console_size.Y / 2 - 1;
 			player2_pos.X = console_size.X - 5;
 
-			Vec2 text_pos = {ball_pos.X - ball_pos.X / 4, ball_pos.Y};
-			Vec2 text_pos_2 = {ball_pos.X - (ball_pos.X / 2 - ball_pos.X / 10), ball_pos.Y + 2};
+			Vec2 text_pos = {ball_pos.X - 32/2, ball_pos.Y};
+			Vec2 text_pos_2 = {ball_pos.X - 58/2, ball_pos.Y + 2};
 			clear_console(console_area);
 			draw_chars("Press 'SPACE' to start the game.", 32, text_pos);
 			draw_chars("Do not resize the terminal windows after pressing 'SPACE'.", 58, text_pos_2);
@@ -138,5 +137,7 @@ int main()
 		swap_buffers();
 	}
 	
+	terminate_renderer();
+
 	return 0;
 }

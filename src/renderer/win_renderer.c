@@ -83,3 +83,8 @@ void set_draw_interval(float interval)
 {
 	draw_interval = interval;
 }
+
+void terminate_renderer()
+{
+	//             I DO NOTHING             //
+}
