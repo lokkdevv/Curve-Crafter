@@ -1,0 +1,10 @@
+# Dependecies:
+- "renderer.h"
+- "input.h"
+
+# Purpose:
+- Example for what a game made with the game engine looks like.
+
+
+The pong game is meant to be an example usage of the game engine.
+All the code is explained with comments in the source code.

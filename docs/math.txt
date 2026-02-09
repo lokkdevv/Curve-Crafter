@@ -1,0 +1,34 @@
+# Dependecies:
+- "ctype.h"
+- "string.h"
+- "stdlib.h"
+
+# Purpose:
+- Provide functions to easily handle mathematical expressions.
+
+
+## MATH:
+
+The math API contains 4 functions, which are:
+
+- square():
+This function squares the input number and returns it as a double.
+
+- cube():
+This function cubes the input number and returns it as a double.
+
+- parse():
+This function takes a c string expression and an int address as input.
+It returns an array of string tokens.
+And it writes the size of the array to the input int address.
+
+- evaluate():
+This function takes an array of string tokens and the size of such array as input.
+It returns the evaluated expression as a double.
+
+# Example Usage:
+```c
+int size;
+char** tokens = parse("5*5", &size);
+double result = evaluate(tokens, size);
+```

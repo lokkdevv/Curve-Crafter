@@ -1,51 +1,101 @@
+# Dependecies:
+- Windows SDK in 'windows'.
+- Terminal that supports escape codes in 'linux'.
+
+# Purpose:
+- Provide cross platform easy ascii rendering for the Terminal.
+
+
 ## renderer:
+
+-> HINT: The variables in the rendering apis are not meant to be used by the user,
+		 only in the api.
+		 Modifying them might cause unexpected behaviour.
+		 Only the function are meant to be called by the user.
+
+
 
 --> on windows:
 
 - swap_buffers():
-
+This function updates variables like console size
+and swaps the two buffers.
+It also sleeps the app for the draw draw interval amount,
+which by default is 60.
+Mind you, This func must be called at the end of the main loop,
+otherwise the app won't work as expected.
 
 - clear_console():
-
+Clears the console by filling it with blanks.
 
 - init_renderer():
-
+This function initializes all the variables and buffers.
+It must be called before you can use any other functions,
+otherwise the app will not work.
 
 - draw_char(char character[], Vec2 pos):
-
+Takes a c string and a Vec2 as input,
+and it draws the string at the specified position,
+that is, only if the string passed is of size one,
+if it's any larger the func won't work as expected.
 
 - draw_chars(char character[], int size, Vec2 pos):
-
+Same as draw_char() but it draws as many chars as you want,
+that is, as long as you pass in the correct string size.
 
 - set_draw_interval(float draw_interval):
-
+Sets the draw interval, which by default, is 60.
+If it's increased then the app runs slower,
+if decreased then it runs faster.
 
 - terminate_renderer():
+On windows at least, this function does nothing,
+its only purpose is to keep code compatible with both linux and windows.
 
 
 
 --> on linux:
 
 - set_cursor_pos(Vec2 pos):
-
+This function sets the cursor position to the input position.
+Mind you, this function is only meant to be used by the linux API,
+Using it in your code will cause your code to be incompatible with windows.
 
 - swap_buffers():
-
+This function updates variables like console size.
+It also sleeps the app for the draw draw interval amount,
+which by default is 60.
+Mind you, This func must be called at the end of the main loop,
+otherwise the app won't work as expected.
 
 - clear_console():
-
+Clears the console.
 
 - init_renderer():
-
+This function initializes all the variables and enters alternative buffer mode.
+It must be called before you can use any other functions,
+otherwise the app will not work as expected.
 
 - draw_char(char character[], Vec2 pos):
-
+Takes a c string and a Vec2 as input,
+and it draws the string at the specified position,
+that is, only if the string passed is of size one,
+if it's any larger the func won't work as expected.
 
 - draw_chars(char character[], int size, Vec2 pos):
-
+Same as draw_char() but it draws as many chars as you want,
+that is, as long as you pass in the correct string size.
 
 - set_draw_interval(float draw_interval):
-
+Sets the draw interval, which by default, is 60.
+If it's increased then the app runs slower,
+if decreased then it runs faster.
 
 - terminate_renderer():
+This function exits alternative buffer mode,
+and sets the cursor back to visible.
 
+
+# Example Usage:
+// Go look at it in "pong.c"
+// Found in "src/games/pong.c"

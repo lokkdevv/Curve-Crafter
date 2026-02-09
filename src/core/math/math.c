@@ -49,6 +49,7 @@ char** parse(const char* expression, int* out_count)
 	*out_count = result_index;
 	return result;
 }
+
 double evaluate(char** tokens, int count)
 {
 	int num = atoi(tokens[0]);
