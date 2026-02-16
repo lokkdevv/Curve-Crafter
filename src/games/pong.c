@@ -32,10 +32,13 @@ int main()
 
 	Vec2 ball_pos = {80, 6};
 
+	init_input();
 	init_renderer();
 	
 	while (running)
 	{
+		poll_input();
+
 		// Seed random number
 		srand(time(NULL));
 
@@ -55,7 +58,7 @@ int main()
 
 			Vec2 text_pos = {ball_pos.X - 32/2, ball_pos.Y};
 			Vec2 text_pos_2 = {ball_pos.X - 58/2, ball_pos.Y + 2};
-			clear_console(console_area);
+			clear_console();
 			draw_chars("Press 'SPACE' to start the game.", 32, text_pos);
 			draw_chars("Do not resize the terminal windows after pressing 'SPACE'.", 58, text_pos_2);
 		}
@@ -68,8 +71,8 @@ int main()
 			//////////////////////////////////////
 			
 			// PLAYER2 input /////////////////////
-			if (is_key_pressed(KEY_UP)) player2_pos.Y -= 1;
-			if (is_key_pressed(KEY_DOWN)) player2_pos.Y += 1;
+			if (is_key_pressed(KEY_I)) player2_pos.Y -= 1;
+			if (is_key_pressed(KEY_K)) player2_pos.Y += 1;
 			//////////////////////////////////////
 			
 			// Player Bounds Checking ////////////
@@ -121,7 +124,7 @@ int main()
 			ball_pos.Y += ball_dir.Y;
 			//////////////////////////////////////
 
-			clear_console(console_area);
+			clear_console();
 			
 			draw_char("@", ball_pos);
 			
@@ -137,6 +140,7 @@ int main()
 		swap_buffers();
 	}
 	
+	terminate_input();
 	terminate_renderer();
 
 	return 0;

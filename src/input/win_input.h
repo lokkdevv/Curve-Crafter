@@ -8,10 +8,10 @@
 #define KEY_ESC VK_ESCAPE
 #define KEY_SPACE VK_SPACE
 
-#define KEY_UP VK_UP
+/*#define KEY_UP VK_UP
 #define KEY_DOWN VK_DOWN
 #define KEY_LEFT VK_LEFT
-#define KEY_RIGHT VK_RIGHT
+#define KEY_RIGHT VK_RIGHT*/
 
 #define KEY_A 0x41
 #define KEY_B 0x42
@@ -40,6 +40,9 @@
 #define KEY_Y 0x59
 #define KEY_Z 0x5A
 
+void init_input();
+void poll_input();
+void terminate_input();
 
 char exited();
 char is_key_pressed(char KEY);

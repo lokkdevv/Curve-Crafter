@@ -48,19 +48,23 @@ int main(int argc, char** argv)
 	char** parsed;
 	double result = 0;
 
+	init_input();
 	init_renderer();
 	set_draw_interval(0);
 
+
 	while (running)
 	{
+		poll_input();
+
 		if (exited()) running = 0;
 
-		if (is_key_pressed(KEY_LEFT)) camera_x_offset += 2;
-		if (is_key_pressed(KEY_RIGHT)) camera_x_offset -= 2;
-		if (is_key_pressed(KEY_UP)) camera_y_offset += 1;
-		if (is_key_pressed(KEY_DOWN)) camera_y_offset -= 1;
+		if (is_key_pressed(KEY_Q)) camera_x_offset += 2;
+		if (is_key_pressed(KEY_D)) camera_x_offset -= 2;
+		if (is_key_pressed(KEY_Z)) camera_y_offset += 1;
+		if (is_key_pressed(KEY_S)) camera_y_offset -= 1;
 		
-		clear_console(console_area);
+		clear_console();
 	
 		// Drawing the axies ////////////////////
 		// X AXIS
@@ -120,7 +124,8 @@ int main(int argc, char** argv)
 
 		swap_buffers();
 	}
-	
+
+	terminate_input();
 	terminate_renderer();
 
 	return 0;
