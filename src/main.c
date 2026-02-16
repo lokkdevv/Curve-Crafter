@@ -33,6 +33,11 @@ int main(int argc, char** argv)
 		return 1;
 	}
 
+	/*int result_count = 0;
+	char** expression = parse(argv[2], &result_count);
+	double test_result = evaluate(expression, result_count);
+	printf("%f\n", test_result);*/
+
 	// char first_time = 1;
 
 	int camera_x_offset = 0;
