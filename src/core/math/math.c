@@ -52,55 +52,34 @@ char** parse(const char* expression, int* out_count)
 
 double evaluate(char** tokens, int count)
 {
-	int has_m_d = 0;
-
-	int num = atoi(tokens[0]);
-	// int old_num = num;
-
-	char opr;
-	double result = num;
+	double result = 0;
+	double temp_result = atof(tokens[0]);
 
 	for (int i = 1; i < count; i += 2)
 	{
-		if (tokens[i][0] == '*' || tokens[i][0] == '/') has_m_d++;
-	}
+		char op = tokens[i][0];
+		double next = atof(tokens[i + 1]);
 
-	for (int i = 1; i < count; i += 2)
-	{
-		opr = tokens[i][0];
-		num = atoi(tokens[i+1]);
-
-		if (has_m_d)
+		if (op == '*')
 		{
-			switch (opr)
-			{
-			case '*':
-				result *= num;
-				has_m_d--;
-				break;
-			case '/':
-				result /= num;
-				has_m_d--;
-				break;
-			default:
-				break;
-			}
+			temp_result *= next;
 		}
-		else
+		else if (op == '/')
 		{
-			switch (opr)
-			{
-			case '+':
-				result += num;
-				break;
-			case '-':
-				result -= num;
-				break;
-			default:
-				break;
-			}
+			temp_result /= next;
+		}
+		else if (op == '+')
+		{
+			result += temp_result;
+			temp_result = next;
+		}
+		else if (op == '-')
+		{
+			result += temp_result;
+			temp_result = -next;
 		}
 	}
 
+	result += temp_result;
 	return result;
 }
