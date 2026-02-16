@@ -33,18 +33,13 @@ int main(int argc, char** argv)
 		return 1;
 	}
 
-	/*int result_count = 0;
-	char** expression = parse(argv[2], &result_count);
-	double test_result = evaluate(expression, result_count);
-	printf("%f\n", test_result);*/
-
-	// char first_time = 1;
+	char first_time = 1;
 
 	int camera_x_offset = 0;
 	int camera_y_offset = 0;
 
-	int x = MIN_X;
-	int num = 0;
+	int x;
+	int num;
 	char** parsed;
 	double result = 0;
 
@@ -63,7 +58,8 @@ int main(int argc, char** argv)
 		if (is_key_pressed(KEY_D)) camera_x_offset -= 2;
 		if (is_key_pressed(KEY_Z)) camera_y_offset += 1;
 		if (is_key_pressed(KEY_S)) camera_y_offset -= 1;
-		
+		x = - console_size.X - camera_x_offset;
+
 		clear_console();
 	
 		// Drawing the axies ////////////////////
@@ -81,11 +77,10 @@ int main(int argc, char** argv)
 		}
 		/////////////////////////////////////////
 
-		// Vec2 old_pos = {0, 0};
+		Vec2 old_pos = {0, 0};
 		// Plotting /////////////////////////////
-		while (x < MAX_X)
+		while (x < /*MAX_X*/ console_size.X - camera_x_offset)
 		{
-			num = 0;
 			parsed = parse(argv[1], &num);
 
 			for (int i = 0; i < num; i++)
@@ -101,25 +96,35 @@ int main(int argc, char** argv)
 			Vec2 pos = {(x + camera_x_offset + console_size.X/2), (-1*(short)(floor(result))) + camera_y_offset + console_size.Y/2};
 			draw_char("*", pos);
 			
-			/*if (first_time)
+			#ifdef SMOOTH
+			if (first_time)
 			{
 				old_pos = pos;
 				first_time = 0;
 				continue;
 			}
 
-			int step = (old_pos.Y < pos.Y) ? 1 : -1;
-			while (old_pos.Y + step < pos.Y)
+			int stepY = (old_pos.Y < pos.Y) ? 1 : -1;
+			int stepX = (old_pos.X < pos.X) ? 1 : -1;
+
+			while (old_pos.Y != pos.Y)
 			{
 				Vec2 new_pos = {old_pos.X, old_pos.Y};
 				draw_char("*", new_pos);
-				old_pos.Y += step;
+				old_pos.Y += stepY;
 			}
-			old_pos = pos;*/
+			while (old_pos.X != pos.X)
+			{
+				Vec2 new_pos = {old_pos.X, old_pos.Y};
+				draw_char("*", new_pos);
+				old_pos.X += stepX;
+			}
+			old_pos = pos;
+			#endif
 			
 		}
 		x = MIN_X;
-		// first_time = 1;
+		first_time = 1;
 		/////////////////////////////////////////
 
 		swap_buffers();
