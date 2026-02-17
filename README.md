@@ -8,10 +8,10 @@
             \/                        \/          \/            \/                 \/             
 
 
-**CurveCrafter** is a terminal-based C project combining:
+**Curve Crafter** is a terminal based C project combining:
 
+- A math function grapher
 - A mini CLI game engine
-- A math function parser & real-time plotting tool
 
 Each part can be used independently, making it easy to repurpose for other projects or experiments.
 
@@ -19,17 +19,16 @@ Each part can be used independently, making it easy to repurpose for other proje
 
 ## Features
 
-- Real-time function plotting of mathematical expressions
-- Flicker-free, double-buffered console rendering
+- Graphing calculator capabilities via command line input
+- Flicker free, double-buffered console rendering
 - Mini CLI game engine for simple terminal games
-- Graphing calculator capabilities via command-line input
 
 ---
 
 ## Requirements
-- Windows OS (Unix/macOS support coming soon)
-- Windows SDK
-- C compiler (`gcc`, `cl`, or any IDE that supports C compilation)
+- Windows OS / Unix OS
+- Windows SDK  `// If using windows OS`
+- C compiler (`gcc`, `cl`, etc)
 
 ## Compiling
 **Graphing Calculator**
@@ -38,7 +37,7 @@ Each part can be used independently, making it easy to repurpose for other proje
 make win 
 ```
 
-- linux: (not supported yet):
+- linux:
 ```bash
 make linux
 ```
@@ -48,7 +47,7 @@ make linux
 make win_pong
 ```
 
-- linux: (not supported yet):
+- linux:
 ```bash
 make linux_pong
 ```
@@ -63,9 +62,8 @@ To run the pong game you can either open it as any regular exe or open it via te
 ```
 
 ## Future Plans
-- Cross-platform terminal support (Unix/Linux/macOS)
 - Multiple functions plotted simultaneously
-- Expand the CLI game engine with reusable modules
+- More optimization
 
 _Contributions are welcome!_ Open an issue or submit a pull request if you want to help.
 
