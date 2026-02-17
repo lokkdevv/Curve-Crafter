@@ -19,6 +19,8 @@
 #define MAX_X 300
 #define MIN_X -300
 
+#define SMOOTH
+
 //////////////////////////////////////////////////////
 // WARNING: Only use functions from the game engine //
 //////////////// Do Not Use variables ////////////////
@@ -58,7 +60,7 @@ int main(int argc, char** argv)
 		if (is_key_pressed(KEY_D)) camera_x_offset -= 2;
 		if (is_key_pressed(KEY_Z)) camera_y_offset += 1;
 		if (is_key_pressed(KEY_S)) camera_y_offset -= 1;
-		x = - console_size.X - camera_x_offset;
+		x = -console_size.X / 2 -1  - camera_x_offset;
 
 		clear_console();
 	
@@ -87,13 +89,12 @@ int main(int argc, char** argv)
 			{
 				if (strcmp(parsed[i], "x") == 0)
 				{
-					char x_buffer[32];
-					parsed[i] = itoa(x, x_buffer, 10);
+					parsed[i] = int_to_ascii(x);
 				}
 			}
 			x++;
 			result = evaluate(parsed, num);
-			Vec2 pos = {(x + camera_x_offset + console_size.X/2), (-1*(short)(floor(result))) + camera_y_offset + console_size.Y/2};
+			Vec2 pos = {(x + camera_x_offset + console_size.X/2), (-1*(short)(engine_floor(result))) + camera_y_offset + console_size.Y/2};
 			draw_char("*", pos);
 			
 			#ifdef SMOOTH
