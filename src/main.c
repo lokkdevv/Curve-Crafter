@@ -19,12 +19,11 @@
 #define MAX_X 300
 #define MIN_X -300
 
-#define SMOOTH
-
 //////////////////////////////////////////////////////
 // WARNING: Only use functions from the game engine //
 //////////////// Do Not Use variables ////////////////
 //////////////////////////////////////////////////////
+
 
 int main(int argc, char** argv)
 {
@@ -34,6 +33,14 @@ int main(int argc, char** argv)
 		printf("EXAMPLE: %s \"9*x\"\n", argv[0]);
 		return 1;
 	}
+
+	char smooth_graph = 0;
+
+	for (int i = 0; i < argc; i++)
+	{
+		if (!strcmp(argv[i], "-s")) smooth_graph = 1;
+	}
+	
 
 	char first_time = 1;
 
@@ -81,7 +88,7 @@ int main(int argc, char** argv)
 
 		Vec2 old_pos = {0, 0};
 		// Plotting /////////////////////////////
-		while (x < /*MAX_X*/ console_size.X - camera_x_offset)
+		while (x < console_size.X - camera_x_offset)
 		{
 			parsed = parse(argv[1], &num);
 
@@ -97,7 +104,8 @@ int main(int argc, char** argv)
 			Vec2 pos = {(x + camera_x_offset + console_size.X/2), (-1*(short)(engine_floor(result))) + camera_y_offset + console_size.Y/2};
 			draw_char("*", pos);
 			
-			#ifdef SMOOTH
+			if (smooth_graph == 0) continue;
+			
 			if (first_time)
 			{
 				old_pos = pos;
@@ -121,7 +129,6 @@ int main(int argc, char** argv)
 				old_pos.X += stepX;
 			}
 			old_pos = pos;
-			#endif
 			
 		}
 		x = MIN_X;

@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -std=c11 -g
 
 main = ./src/main.c
-pong = ./src/games/pong.c
+pong = ./src/examples/pong.c
 
 win_input = ./src/input/win_input.c
 win_renderer = ./src/renderer/win_renderer.c
