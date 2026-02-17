@@ -4,7 +4,6 @@
 #include "input/win_input.h"
 #include "renderer/win_renderer.h"
 #include "core/math/math.h"
-#include "math.h"
 
 #else
 
@@ -12,12 +11,9 @@
 #include "input/linux_input.h"
 #include "renderer/linux_renderer.h"
 #include "core/math/math.h"
-#include "math.h"
 
 #endif
 
-#define MAX_X 300
-#define MIN_X -300
 
 //////////////////////////////////////////////////////
 // WARNING: Only use functions from the game engine //
@@ -41,11 +37,13 @@ int main(int argc, char** argv)
 		if (!strcmp(argv[i], "-s")) smooth_graph = 1;
 	}
 	
-
 	char first_time = 1;
 
 	int camera_x_offset = 0;
 	int camera_y_offset = 0;
+	Vec2 old_camera_pos = {41, 67};
+	Vec2 current_camera_pos;
+	char camera_moved = 1;
 
 	int x;
 	int num;
@@ -63,12 +61,21 @@ int main(int argc, char** argv)
 
 		if (exited()) running = 0;
 
-		if (is_key_pressed(KEY_Q)) camera_x_offset += 2;
+		if (is_key_pressed(KEY_A)) camera_x_offset += 2;
 		if (is_key_pressed(KEY_D)) camera_x_offset -= 2;
-		if (is_key_pressed(KEY_Z)) camera_y_offset += 1;
+		if (is_key_pressed(KEY_W)) camera_y_offset += 1;
 		if (is_key_pressed(KEY_S)) camera_y_offset -= 1;
-		x = -console_size.X / 2 -1  - camera_x_offset;
+		x = -console_size.X / 2 - 1 - camera_x_offset;
 
+		current_camera_pos.X = camera_x_offset;
+		current_camera_pos.Y = camera_y_offset;
+
+		if (old_camera_pos.X != current_camera_pos.X || old_camera_pos.Y != current_camera_pos.Y) camera_moved = 1;
+		else camera_moved = 0;
+		old_camera_pos = current_camera_pos;
+
+		if (!camera_moved) continue;
+		
 		clear_console();
 	
 		// Drawing the axies ////////////////////
@@ -94,10 +101,7 @@ int main(int argc, char** argv)
 
 			for (int i = 0; i < num; i++)
 			{
-				if (strcmp(parsed[i], "x") == 0)
-				{
-					parsed[i] = int_to_ascii(x);
-				}
+				if (strcmp(parsed[i], "x") == 0) parsed[i] = int_to_ascii(x);
 			}
 			x++;
 			result = evaluate(parsed, num);
@@ -131,7 +135,6 @@ int main(int argc, char** argv)
 			old_pos = pos;
 			
 		}
-		x = MIN_X;
 		first_time = 1;
 		/////////////////////////////////////////
 
