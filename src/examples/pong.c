@@ -66,7 +66,7 @@ int main()
 		else if (game_started)
 		{
 			// PLAYER1 input /////////////////////
-			if (is_key_pressed(KEY_Z)) player1_pos.Y -= 1;
+			if (is_key_pressed(KEY_W)) player1_pos.Y -= 1;
 			if (is_key_pressed(KEY_S)) player1_pos.Y += 1;
 			//////////////////////////////////////
 			
